@@ -1,0 +1,68 @@
+-- QUESTION 3: For the trips in November 2025 (lpep_pickup_datetime between '2025-11-01' and '2025-12-01',
+--exclusive of the upper bound), how many trips had a trip_distance of less than or equal to 1 mile?
+
+-- SELECT COUNT(*) AS trip_count
+-- FROM green_taxi_data
+-- WHERE CAST(lpep_pickup_datetime AS DATE) >= '2025-11-01' AND CAST(lpep_pickup_datetime AS DATE) < '2025-12-01'
+-- AND trip_distance <=1.0
+
+------
+-- QUESTION 4: Which was the pick up day with the longest trip distance? 
+--Only consider trips with trip_distance less than 100 miles (to exclude data errors).
+-- Use the pick up time for your calculations.
+
+
+-- SELECT DATE(lpep_pickup_datetime) AS pickup_day
+-- FROM green_taxi_data
+-- WHERE trip_distance < 100.0
+-- ORDER BY trip_distance DESC
+-- LIMIT 1;
+
+------
+--- QUESTION 5:
+--Which was the pickup zone with the largest total_amount (sum of all trips) on November 18th, 2025?
+
+
+-- SELECT tz."Zone", SUM(gt.total_amount) AS total_amount
+-- FROM green_taxi_data AS gt
+-- INNER JOIN taxizonelookup_data AS tz
+-- ON gt."PULocationID" = tz."LocationID"
+-- WHERE DATE(lpep_pickup_datetime) = '2025-11-18'
+-- GROUP BY tz."Zone"
+-- ORDER BY total_amount DESC
+-- LIMIT 1;
+
+-- QUESTION 6:
+
+-- For the passengers picked up in the zone named "East Harlem North" in November 2025, 
+--which was the drop off zone that had the largest tip?
+
+-- Note: it's tip , not trip. We need the name of the zone, not the ID
+
+
+WITH all_pass_in_ehn_11_2025 AS(
+	SELECT *
+	-- gt."VendorID",gt."passenger_count", gt."lpep_pickup_datetime",gt."lpep_dropoff_datetime", tz."Zone"
+	FROM green_taxi_data AS gt
+	INNER JOIN taxizonelookup_data AS tz
+	ON gt."PULocationID" = tz."LocationID"
+	WHERE tz."Zone" = 'East Harlem North'
+	AND EXTRACT(YEAR FROM lpep_pickup_datetime) = 2025
+	AND EXTRACT(MONTH FROM lpep_pickup_datetime) = 11
+)
+
+
+SELECT tz."Zone", MAX(ap."tip_amount") AS tip_amount
+FROM all_pass_in_ehn_11_2025 AS ap
+INNER JOIN taxizonelookup_data AS tz
+ON ap."DOLocationID"= tz."LocationID"
+GROUP BY tz."Zone"
+ORDER BY tip_amount DESC
+LIMIT 1
+
+
+
+
+
+
+

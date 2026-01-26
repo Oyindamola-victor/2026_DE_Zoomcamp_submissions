@@ -1,0 +1,63 @@
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+
+# Secrets and credentials - CRITICAL: Never commit these!
+**/keys/
+**/*.json
+!package.json
+!package-lock.json
+*.key
+*.pem
+*.p12
+*.crt
+*.cer
+*.p7b
+*.p7r
+*.srl
+*.jks
+*.keystore
+*.pfx
+*.env
+.env.local
+.env.*.local
+secrets/
+credentials/
+*.credentials
+*.secret
+
+# GCP Service Account keys - NEVER COMMIT THESE!
+**/gcp_service_account*.json
+**/service-account*.json
+**/*service-account*.json
+terraform_homework/keys/
+
+# Terraform state and secrets
+*.tfstate
+*.tfstate.*
+*.tfvars
+*.tfvars.json
+terraform_homework/terraform.tfstate
+terraform_homework/terraform.tfstate.*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Large data files (optional - uncomment if you don't want to commit data files)
+# *.parquet
+# *.csv
+# Week_1_datasets/
