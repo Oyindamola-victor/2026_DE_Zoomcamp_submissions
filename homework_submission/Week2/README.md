@@ -34,7 +34,9 @@ week2_homework_submission/
 │   ├── .env
 │   ├── .env_encoded
 │   └── gcp_service_account.json
+└── encode_env.sh
 └── README.md
+
 ```
 
 ## Setup
@@ -58,7 +60,7 @@ Then encode and use it:
 
 ```bash
 # Encode the env file (Kestra expects base64-encoded env)
-base64 keys/.env > keys/.env_encoded
+bash encode_env.sh
 ```
 
 ### 2. Start the stack
