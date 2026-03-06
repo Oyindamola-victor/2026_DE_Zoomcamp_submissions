@@ -1,0 +1,5 @@
+keys/
+.env
+.env.*
+.env_encoded
+misc.txt

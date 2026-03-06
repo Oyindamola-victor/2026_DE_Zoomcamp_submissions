@@ -1,0 +1,34 @@
+# Root-level safety net: never commit secrets anywhere in the repo
+**/.env
+**/.env.*
+**/.env_encoded
+**/keys/
+**/gcp_service_account*.json
+**/*.tfstate
+**/*.tfstate.*
+**/*.tfvars
+**/*.tfvars.json
+
+# Python
+**/__pycache__/
+**/*.py[oc]
+**/.venv
+**/venv/
+**/env/
+
+# Downloaded data
+**/dataset/
+
+# IDE and OS
+.DS_Store
+**/.vscode/
+**/.idea/
+*.swp
+*.swo
+*~
+
+# Build and misc
+**/build/
+**/dist/
+**/*.egg-info/
+**/.terraform/
